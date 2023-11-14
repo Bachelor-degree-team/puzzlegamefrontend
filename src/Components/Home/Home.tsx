@@ -12,6 +12,7 @@ const Home = () => {
                 <Link to="/game" className="button">Random Game</Link>
                 <Link to="/searchtablecomponent" className="button">Search for a Game</Link>
                 <Link to="/loginsignup" className="corner-button">Login/SignUp</Link>
+                <Link to="/usermanagement" className="corner-button-2">Manage account</Link>
             </div>
         </div>
     )
