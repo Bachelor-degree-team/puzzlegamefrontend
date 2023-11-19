@@ -2,7 +2,6 @@ import React from 'react';
 import './UserManagement.css'; // Import the CSS file
 
 const UserManagement = () => {
-    // Dummy user data (replace this with real user data from your backend)
     const users = [
         { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
         { id: 2, name: 'Jane Doe', email: 'jane@example.com', role: 'User' },

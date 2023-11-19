@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './SearchTableComponent.css';
 import {Link} from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import Rating from '@mui/material/Rating';
 
 const SearchTableComponent = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -21,10 +23,10 @@ const SearchTableComponent = () => {
 
     return (
         <div className="container">
-            <h1>Search and Table Example</h1>
+            <h1>Search for your game</h1>
             <input
                 type="text"
-                placeholder="Search links..."
+                placeholder="Search games..."
                 value={searchTerm}
                 onChange={handleSearch}
                 className="search-bar"
@@ -32,7 +34,7 @@ const SearchTableComponent = () => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Rating</th>
                     <th>Name</th>
                     <th>Link</th>
                 </tr>
@@ -40,10 +42,11 @@ const SearchTableComponent = () => {
                 <tbody>
                 {filteredData.map((item) => (
                     <tr key={item.id}>
-                        <td>{item.id}</td>
+                        <td>
+                            <Rating name="read-only" defaultValue={2.5} precision={0.5} readOnly /></td>
                         <td>{item.name}</td>
                         <td>
-                            <a href={item.url} target="_blank" rel="noopener noreferrer">
+                            <a className="gamelink" href={item.url} target="_blank" rel="noopener noreferrer">
                                 {item.url}
                             </a>
                         </td>
@@ -51,7 +54,6 @@ const SearchTableComponent = () => {
                 ))}
                 </tbody>
             </table>
-            <Link to="/" className="corner-button">Home</Link>
         </div>
     );
 };

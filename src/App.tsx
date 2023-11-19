@@ -8,10 +8,12 @@ import Game from "./Components/Game/Game";
 import AdminPanel from "./Components/AdminPanel/AdminPanel";
 import UserManagement from "./Components/UserManagement/UserManagement";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import ButtonAppBar from "./Components/ButtonAppBar/ButtonAppBar";
 
 function App() {
   return (
       <Router>
+          <ButtonAppBar/>
           <Routes>
               <Route path="/" element={<Home/>} />
               <Route path="loginsignup/" element={<LoginSignup/>} />

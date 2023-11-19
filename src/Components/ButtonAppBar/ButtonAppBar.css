@@ -1,0 +1,7 @@
+.custom-link {
+    text-decoration: none; /* Removes underline */
+    display: block; /* Separates each link on a new line */
+    margin-bottom: 10px; /* Adds space between links */
+    margin-right: 10px;
+    color: white;
+}

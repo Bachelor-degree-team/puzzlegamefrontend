@@ -13,6 +13,7 @@
     width: 300px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-top: 10px;
 }
 
 .square-container {
@@ -30,6 +31,7 @@
     border-radius: 8px;
     font-weight: bold;
     font-size: 16px;
+    margin-right: 10px;
 }
 
 .green {

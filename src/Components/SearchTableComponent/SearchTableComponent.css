@@ -34,3 +34,8 @@ td {
 th {
     background-color: #f2f2f2;
 }
+
+.gamelink{
+    text-decoration: none;
+    color: black;
+}

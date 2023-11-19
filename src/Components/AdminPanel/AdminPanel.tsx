@@ -2,6 +2,7 @@ import React from 'react';
 import './AdminPanel.css'; // Import the CSS file
 
 const AdminPanel = () => {
+
     return (
         <div className="admin-panel">
             <aside className="sidebar">
