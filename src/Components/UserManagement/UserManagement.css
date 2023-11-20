@@ -1,62 +1,21 @@
-/* UserManagement.css */
-.user-management {
+.root {
+    text-align: center;
+}
+
+.root .MuiTextField-root,
+.root .MuiButton-root {
+    margin: 10px;
+}
+
+.root table {
+    margin: 10px auto;
+}
+
+.container{
     display: flex;
-}
-
-.sidebar {
-    width: 250px;
-    background-color: #333;
-    color: white;
-}
-
-.sidebar-menu {
-    list-style: none;
-    padding: 0;
-}
-
-.menu-item {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.menu-item:hover {
-    background-color: #555;
-}
-
-.menu-item.active {
-    background-color: #555;
-}
-
-.main-content {
-    flex: 1;
-    padding: 20px;
-}
-
-.user-list {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    text-align: left;
-    background-color: #eee;
-}
-
-button {
-    margin-right: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 200px;
+    background: #fff;
+    padding-bottom: 30px;
 }
