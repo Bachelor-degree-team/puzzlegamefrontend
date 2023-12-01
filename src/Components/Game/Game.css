@@ -4,8 +4,17 @@
     margin-top: 50px;
 }
 
+.table-columns {
+    border-collapse: collapse;
+    width: 43%;
+    margin: 0;
+    table-layout: fixed;
+}
+
 .search-container {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
 }
 
 .search-bar {
@@ -34,16 +43,26 @@
     margin-right: 10px;
 }
 
-.green {
+.MATCH {
     background-color: green;
     color: white;
 }
 
-.red {
+.NO_MATCH {
     background-color: red;
     color: white;
 }
 
-.orange {
+.HIGHER {
+    background-color: red;
+    color: white;
+}
+
+.LOWER {
+    background-color: red;
+    color: white;
+}
+
+.PARTIAL_MATCH {
     background-color: orange;
 }

@@ -40,7 +40,7 @@ export default function AlertDialogSlide() {
     onClose={handleClose}
     aria-describedby="alert-dialog-slide-description"
     >
-    <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+    <DialogTitle>{"You have won!"}</DialogTitle>
     <DialogContent>
     <DialogContentText id="alert-dialog-slide-description">
         You have won
@@ -48,7 +48,7 @@ export default function AlertDialogSlide() {
     </DialogContent>
     <DialogActions>
     <Button onClick={handleClose}>Great!!!</Button>
-        <Button onClick={handleClose}>Save your result</Button>
+        <Button onClick={handleClose}>Rate this game</Button>
         </DialogActions>
         </Dialog>
         </React.Fragment>

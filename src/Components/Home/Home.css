@@ -1,32 +1,35 @@
 .app-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+
 }
 
-.button-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+.button-container1 {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    bottom:280px;
+    left:100px;
+}
+
+.button-container2 {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    bottom:185px;
+    left:100px;
+}
+
+.button-container3 {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    bottom:90px;
+    left:100px;
 }
 
 .button {
-    padding: 30px 60px; /* Increase the padding for larger buttons */
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
-    width: 300px;
-    height: 300px;
-    font-size: xxx-large;
-    text-decoration: none;
+    width: 420px;
+    height: 65px;
+    font-size: 100px;
 }
 
 .logo {
