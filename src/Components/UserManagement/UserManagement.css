@@ -15,7 +15,43 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 50px;
     background: #fff;
     padding-bottom: 30px;
+}
+
+.logout {
+    width: 22vw;
+    height: 7vh;
+    font-size: 100px;
+}
+
+.greeting {
+    display: flex;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.text-m{
+    color: #b82248;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.underline-m{
+    width: 61px;
+    height: 6px;
+    background: #720823;
+    border-radius: 9px;
 }

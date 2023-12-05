@@ -1,32 +1,47 @@
-.app-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+.logo {
+    position: absolute;
+    left: 1vw;
+    top: 8vh;
+    width: 33%;
 }
 
-.button-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+.header-landing {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    top:22vh;
+    left:-1vw;
+    color: #474747;
+}
+
+.button-container1 {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    bottom:30vh;
+    left:5vw;
+}
+
+.button-container2 {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    bottom:20vh;
+    left:5vw;
+}
+
+.button-container3 {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    bottom:10vh;
+    left:5vw;
 }
 
 .button {
-    padding: 30px 60px; /* Increase the padding for larger buttons */
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
-    width: 300px;
-    height: 300px;
-    font-size: xxx-large;
-    text-decoration: none;
+    width: 22vw;
+    height: 7vh;
+    font-size: 100px;
 }
 
 .logo {

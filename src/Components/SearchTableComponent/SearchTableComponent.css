@@ -4,6 +4,28 @@
     margin-top: 50px;
 }
 
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.text{
+    color: #d58129;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.underline{
+    width: 61px;
+    height: 6px;
+    background: #84521e;
+    border-radius: 9px;
+}
+
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
