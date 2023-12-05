@@ -7,10 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   background-color: white;
-  background-image: url("Components/Assets/landing_small.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 code {

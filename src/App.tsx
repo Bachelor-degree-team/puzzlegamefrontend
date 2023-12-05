@@ -9,12 +9,12 @@ import GamePanel from "./Components/GamePanel/GamePanel";
 import AdminPanel from "./Components/AdminPanel/AdminPanel";
 import UserManagement from "./Components/UserManagement/UserManagement";
 import {BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";
-import ButtonAppBar from "./Components/ButtonAppBar/ButtonAppBar";
+import {ToastContainer} from "react-toastify";
+import AddGame from "./Components/AddGame/AddGame";
 
 function App() {
     return (
         <Router>
-            <ButtonAppBar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="loginsignup/" element={<LoginSignup/>}/>
@@ -23,7 +23,9 @@ function App() {
                 <Route path="gamepanel/" element={<GamePanel/>}/>
                 <Route path="adminpanel/" element={<AdminPanel/>}/>
                 <Route path="usermanagement/" element={<UserManagement/>}/>
+                <Route path="addgame/" element={<AddGame/>}/>
             </Routes>
+            <ToastContainer/>
         </Router>
     );
 }

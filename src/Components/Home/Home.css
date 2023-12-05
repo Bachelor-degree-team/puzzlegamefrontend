@@ -1,34 +1,46 @@
-.app-container {
+.logo {
+    position: absolute;
+    left: 1vw;
+    top: 8vh;
+    width: 33%;
+}
 
+.header-landing {
+    float: left;
+    margin: 0 1.5%;
+    position:absolute;
+    top:22vh;
+    left:-1vw;
+    color: #474747;
 }
 
 .button-container1 {
     float: left;
     margin: 0 1.5%;
     position:absolute;
-    bottom:280px;
-    left:100px;
+    bottom:30vh;
+    left:5vw;
 }
 
 .button-container2 {
     float: left;
     margin: 0 1.5%;
     position:absolute;
-    bottom:185px;
-    left:100px;
+    bottom:20vh;
+    left:5vw;
 }
 
 .button-container3 {
     float: left;
     margin: 0 1.5%;
     position:absolute;
-    bottom:90px;
-    left:100px;
+    bottom:10vh;
+    left:5vw;
 }
 
 .button {
-    width: 420px;
-    height: 65px;
+    width: 22vw;
+    height: 7vh;
     font-size: 100px;
 }
 

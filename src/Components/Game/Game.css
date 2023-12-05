@@ -31,13 +31,13 @@
 }
 
 .square {
-    width: 150px;
-    height: 150px;
+    width: 8vw;
+    height: 8vw;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #000;
-    border-radius: 8px;
+    border-radius: 12px;
     font-weight: bold;
     font-size: 16px;
     margin-right: 10px;
@@ -49,20 +49,23 @@
 }
 
 .NO_MATCH {
-    background-color: red;
+    background-color: #d60000;
     color: white;
 }
 
 .HIGHER {
-    background-color: red;
+    background-image: url("../Assets/higher.jpg");
+    background-size: cover;
     color: white;
 }
 
 .LOWER {
-    background-color: red;
+    background-image: url("../Assets/lower.jpg");
+    background-size: cover;
     color: white;
 }
 
 .PARTIAL_MATCH {
     background-color: orange;
+    color: white;
 }
