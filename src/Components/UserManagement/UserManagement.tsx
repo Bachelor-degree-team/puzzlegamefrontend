@@ -45,7 +45,7 @@ const UserManagement = () => {
 
 
     useEffect(() => {
-        fetch("/user/logged/" + session)
+        fetch("http://spring-api/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -54,7 +54,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (user.login != undefined && user.login.length > 0) {
-            fetch("/game/" + user.login + "/list")
+            fetch("http://spring-api/game/" + user.login + "/list")
                 .then(res => res.json())
                 .then(result => {
                     setGameList(result);
@@ -64,7 +64,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (doLogout) {
-            fetch("/session/remove/" + session)
+            fetch("http://spring-api/session/remove/" + session)
                 .then(res => res.json())
                 .then(result => {
                     setUser(result);
