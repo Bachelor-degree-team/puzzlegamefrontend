@@ -15,7 +15,7 @@ const SearchTableComponent = () => {
     const [games, setGames] = useState<any[]>([])
 
     useEffect(() => {
-        fetch("/game/public/getAll")
+        fetch("http://spring-api/game/public/getAll")
             .then(res => res.json())
             .then(result => {
                 setGames(result);

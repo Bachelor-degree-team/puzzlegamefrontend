@@ -31,7 +31,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doLogin) {
-            fetch("/user/login", {
+            fetch("http://spring-api/user/login", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {
@@ -47,7 +47,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doRegister) {
-            fetch("/register", {
+            fetch("http://spring-api/register", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {

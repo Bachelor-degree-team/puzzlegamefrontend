@@ -29,7 +29,7 @@ const AddGame = () => {
     const notify_success_added = () => toast.success("Successfully added a game!");
 
     useEffect(() => {
-        fetch("/user/logged/" + session)
+        fetch("http://spring-api/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -75,7 +75,7 @@ const AddGame = () => {
             formData.append('title', title);
             formData.append('desc', description);
             formData.append('session', session || '');
-            fetch("/game/create", {
+            fetch("http://spring-api/game/create", {
                 method: 'POST',
                 body: formData
             })
