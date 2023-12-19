@@ -54,7 +54,7 @@ const Game = () => {
     })
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/active/get/" + gameId)
+        fetch("/game/active/get/" + gameId)
             .then(res => res.json())
             .then(result => {
                 setActiveGame(result);
@@ -64,7 +64,7 @@ const Game = () => {
 
     useEffect(() => {
         if (sendRequest) {
-            fetch("http://localhost:8080/game/" + gameId + "/guess/" + currentGuess)
+            fetch("/game/" + gameId + "/guess/" + currentGuess)
                 .then(res => res.json())
                 .then(result => {
                     setGuessResult(result);
@@ -86,7 +86,7 @@ const Game = () => {
         }
 
         if (guessResult.game_won[0]==='true') {
-            fetch("http://localhost:8080/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
+            fetch("/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
             gameWin();
         }
 

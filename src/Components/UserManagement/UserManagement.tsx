@@ -45,7 +45,7 @@ const UserManagement = () => {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/logged/" + session)
+        fetch("/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -54,7 +54,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (user.login != undefined && user.login.length > 0) {
-            fetch("http://localhost:8080/game/" + user.login + "/list")
+            fetch("/game/" + user.login + "/list")
                 .then(res => res.json())
                 .then(result => {
                     setGameList(result);
@@ -64,7 +64,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (doLogout) {
-            fetch("http://localhost:8080/session/remove/" + session)
+            fetch("/session/remove/" + session)
                 .then(res => res.json())
                 .then(result => {
                     setUser(result);

@@ -31,7 +31,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doLogin) {
-            fetch("http://localhost:8080/user/login", {
+            fetch("/user/login", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {
@@ -47,7 +47,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doRegister) {
-            fetch("http://localhost:8080/register", {
+            fetch("/register", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {

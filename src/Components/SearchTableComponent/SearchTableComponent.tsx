@@ -15,7 +15,7 @@ const SearchTableComponent = () => {
     const [games, setGames] = useState<any[]>([])
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/public/getAll")
+        fetch("/game/public/getAll")
             .then(res => res.json())
             .then(result => {
                 setGames(result);
