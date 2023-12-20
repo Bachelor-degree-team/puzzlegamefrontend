@@ -40,7 +40,7 @@ const AddGame = () => {
     const notify_success_added = () => toast.success("Successfully added a game!");
 
     useEffect(() => {
-        fetch("http://spring-api/user/logged/" + session)
+        fetch("http://34.16.197.214/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -51,7 +51,7 @@ const AddGame = () => {
         if (doCheck) {
             const formData = new FormData();
             formData.append('csv', selectedFile);
-            fetch("http://spring-api/file/check", {
+            fetch("http://34.16.197.214/file/check", {
                 method: 'POST',
                 body: formData
             })
@@ -114,7 +114,7 @@ const AddGame = () => {
             formData.append('title', title);
             formData.append('desc', description);
             formData.append('session', session || '');
-            fetch("http://spring-api/game/create", {
+            fetch("http://34.16.197.214/game/create", {
                 method: 'POST',
                 body: formData
             })

@@ -71,7 +71,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetch("http://spring-api/game/get/example")
+        fetch("http://34.16.197.214/game/get/example")
             .then(res => res.text())
             .then(result => {
                 setExampleGameId(result);
@@ -79,7 +79,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch("http://spring-api/game/get/random")
+        fetch("http://34.16.197.214/game/get/random")
             .then(res => res.text())
             .then(result => {
                 setRandomGameId(result);

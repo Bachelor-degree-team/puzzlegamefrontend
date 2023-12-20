@@ -53,7 +53,7 @@ const UserManagement = () => {
 
 
     useEffect(() => {
-        fetch("http://spring-api/user/logged/" + session)
+        fetch("http://34.16.197.214/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -61,7 +61,7 @@ const UserManagement = () => {
     }, [])
 
     useEffect(() => {
-        fetch("http://spring-api/user/" + session + "/scores/get")
+        fetch("http://34.16.197.214/user/" + session + "/scores/get")
             .then(res => res.json())
             .then(result => {
                 setScores(result);
@@ -70,7 +70,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (user.login != undefined && user.login.length > 0) {
-            fetch("http://spring-api/game/" + user.login + "/list")
+            fetch("http://34.16.197.214/game/" + user.login + "/list")
                 .then(res => res.json())
                 .then(result => {
                     setGameList(result);
@@ -80,7 +80,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (doLogout) {
-            fetch("http://spring-api/session/remove/" + session)
+            fetch("http://34.16.197.214/session/remove/" + session)
                 .then(res => res.json())
                 .then(result => {
                     setUser(result);

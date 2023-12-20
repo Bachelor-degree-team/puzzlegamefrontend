@@ -16,7 +16,7 @@ const GamePanel = () => {
     const [activeGameReady, setActiveGameReady] = useState(false);
 
     useEffect(() => {
-        fetch("http://spring-api/game/get/" + gameId)
+        fetch("http://34.16.197.214/game/get/" + gameId)
             .then(res => res.json())
             .then(result => {
                 setGame(result);
@@ -25,7 +25,7 @@ const GamePanel = () => {
 
     useEffect(() => {
         if (sendRequest) {
-            fetch("http://spring-api/game/" + gameId + "/play")
+            fetch("http://34.16.197.214/game/" + gameId + "/play")
                 .then(res => res.text())
                 .then(result => {
                     setActiveGameId(result);
