@@ -66,7 +66,7 @@ const SearchTableComponent = () => {
                                 <Rating name="read-only" defaultValue={item.rating} precision={0.5} readOnly/>
                             </td>
                             <td>
-                                <a className="gamelink" href={"http://http://34.125.96.124//gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
+                                <a className="gamelink" href={"http://34.125.96.124/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
                                     {item.title}
                                 </a>
                             </td>
