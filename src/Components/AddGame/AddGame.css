@@ -11,6 +11,10 @@
     margin: 10px auto;
 }
 
+.filechange {
+    margin-bottom: 10px;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -93,4 +97,29 @@
     height: 6px;
     background: #3c738c;
     border-radius: 9px;
+}
+
+.square-result {
+    width: 480px;
+    height: 11vw;
+    justify-content: left;
+    align-items: center;
+    border: 2px solid lightgray;
+    background-color: lightgray;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.result-input {
+    margin-top: 9px;
+    margin-bottom: 8px;
+    color: #474747;
+    font-size: 18px;
+    border: none;
+    outline: none;
+}
+
+.hidden-add {
+    visibility: hidden;
+    height: 1px;
 }

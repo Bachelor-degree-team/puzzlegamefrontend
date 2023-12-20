@@ -24,6 +24,9 @@ const Home = () => {
     const queryParameters = new URLSearchParams(window.location.search)
     const session = queryParameters.get("session")
 
+    const [exampleGameId, setExampleGameId] = useState('');
+    const [randomGameId, setRandomGameId] = useState('');
+
     const [helpMessage1, setHelpMessage1] = useState('');
     const [helpMessage2, setHelpMessage2] = useState('');
     const [helpMessage3, setHelpMessage3] = useState('');
@@ -67,12 +70,29 @@ const Home = () => {
         setNavSearch(true)
     }
 
+    useEffect(() => {
+        fetch("http://spring-api/game/get/example")
+            .then(res => res.text())
+            .then(result => {
+                setExampleGameId(result);
+            })
+    }, []);
+
+    useEffect(() => {
+        fetch("http://spring-api/game/get/random")
+            .then(res => res.text())
+            .then(result => {
+                setRandomGameId(result);
+            })
+    }, []);
+
+
     if (navExample) {
-        return <Navigate to={"/search?session=" + session} />
+        return <Navigate to={"/gamepanel?id=" + exampleGameId + "&session=" + session} />
     }
 
     if (navRandom) {
-        return <Navigate to={"/search?session=" + session} />
+        return <Navigate to={"/gamepanel?id=" + randomGameId + "&session=" + session} />
     }
 
     if (navSearch) {

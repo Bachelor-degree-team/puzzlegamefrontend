@@ -53,6 +53,19 @@ const Game = () => {
         game_won: ['']
     })
 
+    const [guessResults, setGuessResults] = useState(
+        [
+            {
+                [activeGame.columns[0]]: [''],
+                [activeGame.columns[1]]: [''],
+                [activeGame.columns[2]]: [''],
+                [activeGame.columns[3]]: [''],
+                [activeGame.columns[4]]: [''],
+                game_won: ['']
+            }
+        ]
+    )
+
     useEffect(() => {
         fetch("http://spring-api/game/active/get/" + gameId)
             .then(res => res.json())
@@ -67,6 +80,8 @@ const Game = () => {
             fetch("http://spring-api/game/" + gameId + "/guess/" + currentGuess)
                 .then(res => res.json())
                 .then(result => {
+                    const newList = guessResults.concat(result)
+                    setGuessResults(newList);
                     setGuessResult(result);
                 })
                 .then(() =>
@@ -96,11 +111,9 @@ const Game = () => {
     const [scope, animate] = useAnimate();
     const animateOnClick = () => {
       animate([
-          [".square", { y: [-100, 0], opacity: [0, 1] }, {duration: 0.2, delay: stagger(0.5) }]
+          [".anim", { y: [-100, 0], opacity: [0, 1] }, {duration: 0.2, delay: stagger(0.5) }]
       ]);
     }
-
-    const str = Object.values(guessResult)[0]
 
     const sendRequestTrue = useCallback(async () => {
 
@@ -112,6 +125,23 @@ const Game = () => {
 
         setIsSending(false)
     }, [isSending])
+
+    const getSquares = () => {
+        let content = [];
+        const len = guessResults.length - 1
+        for (let i = len; i >= 0; i--) {
+            content.push(
+                <div className="square-container">
+                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[0]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[0]] || [''] )[0] || ''}</div>
+                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[1]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[1]] || [''] )[0] || ''}</div>
+                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[2]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[2]] || [''] )[0] || ''}</div>
+                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[3]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[3]] || [''] )[0] || ''}</div>
+                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[4]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[4]] || [''] )[0] || ''}</div>
+                </div>
+            );
+        }
+        return content;
+    };
 
     return (
         <motion.div ref={scope} style={{ backgroundImage:`url('${background}')`, backgroundPosition: `center`, backgroundRepeat: `no-repeat`, backgroundSize: `cover`, height: `100vh`}}>
@@ -146,14 +176,9 @@ const Game = () => {
                     </tr>
                     </thead>
                 </table>
-
-                <div className="square-container">
-                    <div className={"square " + (guessResult[activeGame.columns[0]] || [''] )[1] || ''}>{(guessResult[activeGame.columns[0]] || [''] )[0] || ''}</div>
-                    <div className={"square " + (guessResult[activeGame.columns[1]] || [''] )[1] || ''}>{(guessResult[activeGame.columns[1]] || [''] )[0] || ''}</div>
-                    <div className={"square " + (guessResult[activeGame.columns[2]] || [''] )[1] || ''}>{(guessResult[activeGame.columns[2]] || [''] )[0] || ''}</div>
-                    <div className={"square " + (guessResult[activeGame.columns[3]] || [''] )[1] || ''}>{(guessResult[activeGame.columns[3]] || [''] )[0] || ''}</div>
-                    <div className={"square " + (guessResult[activeGame.columns[4]] || [''] )[1] || ''}>{(guessResult[activeGame.columns[4]] || [''] )[0] || ''}</div>
-                </div>
+                {
+                    getSquares()
+                }
             </motion.div>
         </motion.div>
     );

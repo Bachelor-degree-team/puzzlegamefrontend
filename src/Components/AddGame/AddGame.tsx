@@ -21,10 +21,21 @@ const AddGame = () => {
     const[selectedFile, setSelectedFile] = useState('')
     const [doRedirectHome, setDoRedirectHome] = useState(false);
     const [doSubmit, setDoSubmit] = useState(false);
+    const [doCheck, setDoCheck] = useState(false);
+    const [hasChecked, setHasChecked] = useState(false);
     const [user, setUser] = useState({
         login: '',
         scores: [['']]
     });
+    const [fileCheckResult, setFileCheckResult] = useState<any>({
+        foul_language: false,
+        same_size_rows: false,
+        same_type_columns: false,
+        all_string_first_row: false,
+        minimum_5: false,
+        maximum_1000: false,
+        all_fields_checked: false
+    })
 
     const notify_success_added = () => toast.success("Successfully added a game!");
 
@@ -36,12 +47,40 @@ const AddGame = () => {
             })
     }, [])
 
+    useEffect(() => {
+        if (doCheck) {
+            const formData = new FormData();
+            formData.append('csv', selectedFile);
+            fetch("http://spring-api/file/check", {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(result => {
+                    setFileCheckResult(result);
+                })
+                .then(() => {
+                    setDoCheck(false);
+                })
+        }
+    }, [doCheck])
+
     const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
+        console.log(title)
     }
 
     const handleDesc = (e: ChangeEvent<HTMLInputElement>) => {
         setDescription(e.target.value)
+        console.log(description)
+    }
+
+    const isNotAllProper = () => {
+        return !((title.length >= 5) && (title.length <= 50) && (description.length >= 20) && (description.length <= 1000) && fileCheckResult.all_fields_checked)
+    }
+
+    const isNotFileUploaded = () => {
+        return selectedFile===''
     }
 
     const handlePublic = (e: ChangeEvent<HTMLInputElement>) => {
@@ -117,10 +156,10 @@ const AddGame = () => {
 
                 <div className="inputs">
                     <div className="input">
-                        <input type="name" placeholder="Title" value={title} onChange={(e) => handleTitle(e)}/>
+                        <input type="name" placeholder="Title (5 or more characters, 50 max)" value={title} onChange={(e) => handleTitle(e)}/>
                     </div>
                     <div className="input">
-                        <input type="name" placeholder="Description" value={description} onChange={(e) => handleDesc(e)}/>
+                        <input type="name" placeholder="Description (20 or more characters, 1000 max)" value={description} onChange={(e) => handleDesc(e)}/>
                     </div>
                 </div>
 
@@ -129,11 +168,30 @@ const AddGame = () => {
                     <Checkbox defaultChecked value={isPublic} onChange={(e) => handlePublic(e)}/>
                 </div>
 
-                <input type="file" onChange={(e) => onFileChange(e)}/>
-
+                <input type="file" className="filechange" onChange={(e) => onFileChange(e)}/>
+                    <div className="square-result">
+                        <div className="result-input">The file must contain at least 5 entries {hasChecked ? fileCheckResult.minimum_5 ? "✔️" : "❌" : ""}</div>
+                        <div className="result-input">The file must contain at most 1000 entries {hasChecked ? fileCheckResult.maximum_1000 ? "✔️" : "❌" : ""}</div>
+                        <div className="result-input">The header row must have no numeric values {hasChecked ? fileCheckResult.all_string_first_row ? "✔️" : "❌" : ""}</div>
+                        <div className="result-input">All rows must have the same number of entries {hasChecked ? fileCheckResult.same_size_rows ? "✔️" : "❌" : ""}</div>
+                        <div className="result-input">All columns must be of the same type {hasChecked ? fileCheckResult.same_type_columns ? "✔️" : "❌" : ""}</div>
+                        <div className="result-input">No foul language must be detected {hasChecked ? fileCheckResult.foul_language ? "✔️" : "❌" : ""}</div>
+                    </div>
+                <ThemeProvider theme={theme}>
+                    <Button variant="outlined" className="submit-a"
+                            disabled={isNotFileUploaded()}
+                            style={{fontSize: '20px', textTransform: 'none', marginTop: '10px'}}
+                            onClick={() => {
+                               setDoCheck(true);
+                               setHasChecked(true);
+                            }}>
+                        Check file (required)
+                    </Button>
+                </ThemeProvider>
                 <ThemeProvider theme={theme}>
                     <Button variant="contained" className="submit-a"
-                            style={{fontSize: '20px', textTransform: 'none'}}
+                            disabled={isNotAllProper()}
+                            style={{fontSize: '20px', textTransform: 'none', marginTop: '10px'}}
                             onClick={() => setDoSubmit(true)}>
                         Submit
                     </Button>

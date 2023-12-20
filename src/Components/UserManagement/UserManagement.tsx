@@ -32,6 +32,14 @@ const UserManagement = () => {
         scores: [['']]
     });
 
+    const [scores, setScores] = useState(
+        [{
+            title: '',
+            score: 0,
+            id: ''
+        }]
+    );
+
     const [gameList, setGameList] = useState(
         [{
             name: '',
@@ -45,7 +53,7 @@ const UserManagement = () => {
 
 
     useEffect(() => {
-        fetch("/user/logged/" + session)
+        fetch("http://spring-api/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -53,8 +61,16 @@ const UserManagement = () => {
     }, [])
 
     useEffect(() => {
+        fetch("http://spring-api/user/" + session + "/scores/get")
+            .then(res => res.json())
+            .then(result => {
+                setScores(result);
+            })
+    }, [])
+
+    useEffect(() => {
         if (user.login != undefined && user.login.length > 0) {
-            fetch("/game/" + user.login + "/list")
+            fetch("http://spring-api/game/" + user.login + "/list")
                 .then(res => res.json())
                 .then(result => {
                     setGameList(result);
@@ -64,7 +80,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (doLogout) {
-            fetch("/session/remove/" + session)
+            fetch("http://spring-api/session/remove/" + session)
                 .then(res => res.json())
                 .then(result => {
                     setUser(result);
@@ -182,10 +198,16 @@ const UserManagement = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {user.scores.map((score) => (
+                                        {scores.map((score) => (
                                             <TableRow>
-                                                <TableCell>{score[0]}</TableCell>
-                                                <TableCell>{score[1]}</TableCell>
+                                                <TableCell><a className="gamelink"
+                                                              href={"http://localhost:3000/gamepanel?id=" + score.id + "&session=" + session}
+                                                              target="_blank" rel="noopener noreferrer">
+                                                    {score.title}
+                                                </a></TableCell>
+                                                <TableCell>
+                                                    {score.score}
+                                                </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
