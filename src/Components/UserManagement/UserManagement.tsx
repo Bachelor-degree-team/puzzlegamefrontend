@@ -201,7 +201,7 @@ const UserManagement = () => {
                                         {scores.map((score) => (
                                             <TableRow>
                                                 <TableCell><a className="gamelink"
-                                                              href={"http://34.125.96.124/gamepanel?id=" + score.id + "&session=" + session}
+                                                              href={"http://34.125.231.221/gamepanel?id=" + score.id + "&session=" + session}
                                                               target="_blank" rel="noopener noreferrer">
                                                     {score.title}
                                                 </a></TableCell>
