@@ -1,0 +1,125 @@
+.root {
+    text-align: center;
+}
+
+.root .MuiTextField-root,
+.root .MuiButton-root {
+    margin: 10px;
+}
+
+.root table {
+    margin: 10px auto;
+}
+
+.filechange {
+    margin-bottom: 10px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 150px;
+    background: #fff;
+    padding-bottom: 30px;
+}
+
+.inputs{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.input{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+    height: 80px;
+    background: white;
+    border-radius: 6px;
+    border: 2px solid gray;
+}
+
+.input input{
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: gray;
+    font-size: 19px;
+    margin-left: 20px;
+}
+
+.checkboxer {
+    display: flex;
+}
+
+.checkboxer .textb{
+    margin-top: 5px;
+}
+
+.submit-a {
+    width: 16vw;
+    height: 6vh;
+    font-size: 100px;
+    margin-top: 30px;
+}
+
+.greeting {
+    display: flex;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.text-r{
+    color: #d11b1b;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.underline-r{
+    width: 61px;
+    height: 6px;
+    background: #a10000;
+    border-radius: 9px;
+}
+
+.square-result {
+    width: 480px;
+    height: 11vw;
+    justify-content: left;
+    align-items: center;
+    border: 2px solid lightgray;
+    background-color: lightgray;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.result-input {
+    margin-top: 9px;
+    margin-bottom: 8px;
+    color: #474747;
+    font-size: 18px;
+    border: none;
+    outline: none;
+}
+
+.hidden-add {
+    visibility: hidden;
+    height: 1px;
+}

@@ -67,7 +67,7 @@ const Game = () => {
     )
 
     useEffect(() => {
-        fetch("http://34.16.197.214/game/active/get/" + gameId)
+        fetch("http://localhost:8080/game/active/get/" + gameId)
             .then(res => res.json())
             .then(result => {
                 setActiveGame(result);
@@ -77,7 +77,7 @@ const Game = () => {
 
     useEffect(() => {
         if (sendRequest) {
-            fetch("http://34.16.197.214/game/" + gameId + "/guess/" + currentGuess)
+            fetch("http://localhost:8080/game/" + gameId + "/guess/" + currentGuess)
                 .then(res => res.json())
                 .then(result => {
                     const newList = guessResults.concat(result)
@@ -101,7 +101,7 @@ const Game = () => {
         }
 
         if (guessResult.game_won[0]==='true') {
-            fetch("http://34.16.197.214/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
+            fetch("http://localhost:8080/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
             gameWin();
         }
 

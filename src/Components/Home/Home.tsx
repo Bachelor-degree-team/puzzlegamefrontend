@@ -71,7 +71,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetch("http://34.16.197.214/game/get/example")
+        fetch("http://localhost:8080/game/get/example")
             .then(res => res.text())
             .then(result => {
                 setExampleGameId(result);
@@ -79,7 +79,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch("http://34.16.197.214/game/get/random")
+        fetch("http://localhost:8080/game/get/random")
             .then(res => res.text())
             .then(result => {
                 setRandomGameId(result);
