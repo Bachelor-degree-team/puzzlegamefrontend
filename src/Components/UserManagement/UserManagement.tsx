@@ -26,8 +26,28 @@ const UserManagement = () => {
 
     const [doLogout, setDoLogout] = useState(false);
     const [doAddGame, setDoAddGame] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [doShareGame, setDoShareGame] = useState({
+        doShare: false,
+        gameId: ''
+    });
+    const [doRemoveGame, setDoRemoveGame] = useState({
+        doRemove: false,
+        gameId: ''
+    });
+    const [doChangeVisible, setDoChangeVisible] = useState({
+        doChange: false,
+        gameId: ''
+    });
+    const [doRemoveUser, setDoRemoveUser] = useState({
+        doRemove: false,
+        userId: ''
+    });
+
     const [doRedirectHome, setDoRedirectHome] = useState(false);
+    const [doRedirectAdmin, setDoRedirectAdmin] = useState(false);
     const [user, setUser] = useState({
+        id: '',
         login: '',
         scores: [['']]
     });
@@ -42,18 +62,20 @@ const UserManagement = () => {
 
     const [gameList, setGameList] = useState(
         [{
+            id: '',
             name: '',
             isPublic: false,
             rating: 0
         }]
     );
 
-
     const notify_success_logout = () => toast.success("Successfully logged out!");
+    const notify_success_visible = () => toast.success("Visibility changed successfully!");
+    const notify_success_linkcopy = () => toast.success("Link copied to clipboard!");
 
 
     useEffect(() => {
-        fetch("http://34.16.197.214/user/logged/" + session)
+        fetch("http://localhost:8080/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -61,7 +83,15 @@ const UserManagement = () => {
     }, [])
 
     useEffect(() => {
-        fetch("http://34.16.197.214/user/" + session + "/scores/get")
+        fetch("http://localhost:8080/user/isAdmin/" + session)
+            .then(res => res.json())
+            .then(result => {
+                setIsAdmin(result);
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("http://localhost:8080/user/" + session + "/scores/get")
             .then(res => res.json())
             .then(result => {
                 setScores(result);
@@ -70,17 +100,17 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (user.login != undefined && user.login.length > 0) {
-            fetch("http://34.16.197.214/game/" + user.login + "/list")
+            fetch("http://localhost:8080/game/" + user.login + "/list")
                 .then(res => res.json())
                 .then(result => {
                     setGameList(result);
                 })
         }
-    }, [user])
+    }, [user, doChangeVisible])
 
     useEffect(() => {
         if (doLogout) {
-            fetch("http://34.16.197.214/session/remove/" + session)
+            fetch("http://localhost:8080/session/remove/" + session)
                 .then(res => res.json())
                 .then(result => {
                     setUser(result);
@@ -90,6 +120,25 @@ const UserManagement = () => {
         }
     }, [doLogout])
 
+    useEffect(() => {
+        if (doChangeVisible.doChange) {
+            fetch("http://localhost:8080/game/visibility/" + doChangeVisible.gameId)
+                .then(res => res.json())
+                .then(() => {
+                    notify_success_visible();
+                    setDoChangeVisible({doChange: false, gameId: ''});
+                })
+        }
+    }, [doChangeVisible])
+
+    useEffect(() => {
+        if (doShareGame.doShare) {
+            navigator.clipboard.writeText('http://localhost:3000/gamepanel?id=' + doShareGame.gameId)
+            notify_success_linkcopy()
+            setDoShareGame({doShare: false, gameId: ''})
+        }
+    }, [doShareGame])
+
     const theme = createTheme({
         palette: {
             primary: {
@@ -98,6 +147,20 @@ const UserManagement = () => {
             },
             secondary: {
                 main: '#b82248'
+            },
+            error: {
+                main: '#a10000'
+            }
+        }
+    });
+    const themeError = createTheme({
+        palette: {
+            primary: {
+                main: '#a10000',
+                contrastText: '#fff'
+            },
+            secondary: {
+                main: '#a10000'
             }
         }
     });
@@ -106,8 +169,20 @@ const UserManagement = () => {
         return <Navigate to={"/"}/>
     }
 
+    if (doRedirectAdmin) {
+        return <Navigate to={"/adminpanel?session=" + session}/>
+    }
+
     if (doAddGame) {
         return <Navigate to={"/addgame?session=" + session}/>
+    }
+
+    if (doRemoveGame.doRemove) {
+        return <Navigate to={"/removegame?session=" + session + "&id=" + doRemoveGame.gameId}/>
+    }
+
+    if (doRemoveUser.doRemove) {
+        return <Navigate to={"/removeuser?session=" + session + "&id=" + doRemoveUser.userId}/>
     }
 
     return (
@@ -160,8 +235,28 @@ const UserManagement = () => {
                                 </Button>
                             </ThemeProvider>
                         </Grid>
-
-                        {gameList != undefined ?
+                        {isAdmin ?
+                            <Grid item xs={12}>
+                                <ThemeProvider theme={theme}>
+                                    <Button variant="contained" className="logout"
+                                            style={{fontSize: '20px', textTransform: 'none'}}
+                                            onClick={() => setDoRedirectAdmin(true)}>
+                                        Admin Panel
+                                    </Button>
+                                </ThemeProvider>
+                            </Grid>
+                            :
+                            <Grid item xs={12}>
+                                <ThemeProvider theme={themeError}>
+                                    <Button variant="contained" className="logout"
+                                            style={{fontSize: '20px', textTransform: 'none'}}
+                                            onClick={() => setDoRemoveUser({doRemove: true, userId: user.id})}>
+                                        Delete Account
+                                    </Button>
+                                </ThemeProvider>
+                            </Grid>
+                        }
+                        {gameList !== undefined ?
                             <Grid item xs={12}>
                                 <Typography style={{marginBottom: '10px'}} variant="h4">My Games</Typography>
                                 <TableContainer component={Paper}>
@@ -171,14 +266,42 @@ const UserManagement = () => {
                                                 <TableCell>Game Name</TableCell>
                                                 <TableCell>Rating</TableCell>
                                                 <TableCell>Public</TableCell>
+                                                <TableCell>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {gameList.map((game) => (
                                                 <TableRow>
-                                                    <TableCell>{game.name}</TableCell>
+                                                    <TableCell><a className="gamelink"
+                                                                  href={"http://localhost:3000/gamepanel?id=" + game.id + "&session=" + session}
+                                                                  target="_blank" rel="noopener noreferrer">
+                                                        {game.name}
+                                                    </a></TableCell>
                                                     <TableCell>{game.rating}</TableCell>
                                                     <TableCell>{game.isPublic ? "Yes" : "No"}</TableCell>
+                                                    <TableCell width={350}>
+                                                        <ThemeProvider theme={theme}>
+                                                            <Button variant="contained"
+                                                                    style={{fontSize: '15px', textTransform: 'none', marginRight: '10px'}}
+                                                                    onClick={() => setDoShareGame({doShare: true, gameId: game.id})}>
+                                                                Share Link
+                                                            </Button>
+                                                        </ThemeProvider>
+                                                        <ThemeProvider theme={theme}>
+                                                            <Button variant="contained"
+                                                                    style={{fontSize: '15px', textTransform: 'none', marginRight: '10px'}}
+                                                                    onClick={() => setDoChangeVisible({doChange: true, gameId: game.id})}>
+                                                                {game.isPublic ? 'Set Private' : 'Set Public'}
+                                                            </Button>
+                                                        </ThemeProvider>
+                                                        <ThemeProvider theme={themeError}>
+                                                            <Button variant="contained"
+                                                                    style={{fontSize: '15px', textTransform: 'none'}}
+                                                                    onClick={() => setDoRemoveGame({doRemove: true, gameId: game.id})}>
+                                                                Delete
+                                                            </Button>
+                                                        </ThemeProvider>
+                                                    </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
@@ -201,7 +324,7 @@ const UserManagement = () => {
                                         {scores.map((score) => (
                                             <TableRow>
                                                 <TableCell><a className="gamelink"
-                                                              href={"http://34.125.231.221/gamepanel?id=" + score.id + "&session=" + session}
+                                                              href={"http://localhost:3000/gamepanel?id=" + score.id + "&session=" + session}
                                                               target="_blank" rel="noopener noreferrer">
                                                     {score.title}
                                                 </a></TableCell>

@@ -15,7 +15,7 @@ const SearchTableComponent = () => {
     const [games, setGames] = useState<any[]>([])
 
     useEffect(() => {
-        fetch("http://34.16.197.214/game/public/getAll")
+        fetch("http://localhost:8080/game/public/getAll")
             .then(res => res.json())
             .then(result => {
                 setGames(result);
@@ -66,7 +66,7 @@ const SearchTableComponent = () => {
                                 <Rating name="read-only" defaultValue={item.rating} precision={0.5} readOnly/>
                             </td>
                             <td>
-                                <a className="gamelink" href={"http://34.125.231.221/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
+                                <a className="gamelink" href={"http://localhost:3000/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
                                     {item.title}
                                 </a>
                             </td>

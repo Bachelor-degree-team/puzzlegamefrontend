@@ -11,6 +11,8 @@ import UserManagement from "./Components/UserManagement/UserManagement";
 import {BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import AddGame from "./Components/AddGame/AddGame";
+import RemoveGame from "./Components/RemoveGame/RemoveGame";
+import RemoveUser from "./Components/RemoveUser/RemoveUser";
 
 function App() {
     return (
@@ -24,6 +26,8 @@ function App() {
                 <Route path="adminpanel/" element={<AdminPanel/>}/>
                 <Route path="usermanagement/" element={<UserManagement/>}/>
                 <Route path="addgame/" element={<AddGame/>}/>
+                <Route path="removegame/" element={<RemoveGame/>}/>
+                <Route path="removeuser/" element={<RemoveUser/>}/>
             </Routes>
             <ToastContainer/>
         </Router>

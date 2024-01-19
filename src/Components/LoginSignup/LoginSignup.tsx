@@ -31,7 +31,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doLogin) {
-            fetch("http://34.16.197.214/user/login", {
+            fetch("http://localhost:8080/user/login", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {
@@ -47,7 +47,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doRegister) {
-            fetch("http://34.16.197.214/register", {
+            fetch("http://localhost:8080/register", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {

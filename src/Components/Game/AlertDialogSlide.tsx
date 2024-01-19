@@ -51,7 +51,7 @@ export default function AlertDialogSlide({count, gameId, session}: { count: numb
 
     useEffect(() => {
         if(rateSubmit) {
-            fetch("http://34.16.197.214/game/" + gameId + "/ratings/" + session + "/rate/" + value)
+            fetch("http://localhost:8080/game/" + gameId + "/ratings/" + session + "/rate/" + value)
                 .then(res => res.text())
                 .then(() => {
                     notify_success_rate()
