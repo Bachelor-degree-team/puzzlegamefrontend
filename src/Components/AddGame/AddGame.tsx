@@ -18,6 +18,7 @@ const AddGame = () => {
     const[title, setTitle] = useState('')
     const[description, setDescription] = useState('')
     const[isPublic, setIsPublic] = useState(true)
+    const[isRak, setIsRak] = useState(false)
     const[selectedFile, setSelectedFile] = useState('')
     const [doRedirectHome, setDoRedirectHome] = useState(false);
     const [doSubmit, setDoSubmit] = useState(false);
@@ -51,6 +52,7 @@ const AddGame = () => {
         if (doCheck) {
             const formData = new FormData();
             formData.append('csv', selectedFile);
+            formData.append('separator', isRak ? ';' : ',');
             fetch("http://localhost:8080/file/check", {
                 method: 'POST',
                 body: formData
@@ -88,6 +90,11 @@ const AddGame = () => {
         console.log(e.target.checked)
     }
 
+    const handleRak = (e: ChangeEvent<HTMLInputElement>) => {
+        setIsRak(e.target.checked)
+        console.log(e.target.checked)
+    }
+
     const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         // @ts-ignore
         setSelectedFile(e.target.files[0])
@@ -109,7 +116,7 @@ const AddGame = () => {
         if (doSubmit) {
             const formData = new FormData();
             formData.append('csv', selectedFile);
-            formData.append('separator', ',');
+            formData.append('separator', isRak ? ';' : ',');
             formData.append('isPublic', String(isPublic));
             formData.append('title', title);
             formData.append('desc', description);
@@ -166,6 +173,11 @@ const AddGame = () => {
                 <div className="checkboxer">
                     <Typography className="textb" variant={"h6"}>Public</Typography>
                     <Checkbox defaultChecked value={isPublic} onChange={(e) => handlePublic(e)}/>
+                </div>
+
+                <div className="checkboxer">
+                    <Typography className="textb" variant={"h6"}>Use .rak file (lists possible)</Typography>
+                    <Checkbox value={isRak} onChange={(e) => handleRak(e)}/>
                 </div>
 
                 <input type="file" className="filechange" onChange={(e) => onFileChange(e)}/>
