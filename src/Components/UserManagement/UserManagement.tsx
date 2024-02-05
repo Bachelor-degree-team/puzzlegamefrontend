@@ -19,6 +19,7 @@ import {motion} from 'framer-motion';
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
 import {toast} from "react-toastify";
 import {Navigate} from "react-router-dom";
+import {host_back, host_front} from "../../Constants/global";
 
 const UserManagement = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -75,7 +76,7 @@ const UserManagement = () => {
 
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/logged/" + session)
+        fetch(host_back + "/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -83,7 +84,7 @@ const UserManagement = () => {
     }, [])
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/isAdmin/" + session)
+        fetch(host_back + "/user/isAdmin/" + session)
             .then(res => res.json())
             .then(result => {
                 setIsAdmin(result);
@@ -91,7 +92,7 @@ const UserManagement = () => {
     }, [])
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/" + session + "/scores/get")
+        fetch(host_back + "/user/" + session + "/scores/get")
             .then(res => res.json())
             .then(result => {
                 setScores(result);
@@ -100,7 +101,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (user.login != undefined && user.login.length > 0) {
-            fetch("http://localhost:8080/game/" + user.login + "/list")
+            fetch(host_back + "/game/" + user.login + "/list")
                 .then(res => res.json())
                 .then(result => {
                     setGameList(result);
@@ -110,7 +111,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (doLogout) {
-            fetch("http://localhost:8080/session/remove/" + session)
+            fetch(host_back + "/session/remove/" + session)
                 .then(res => res.json())
                 .then(result => {
                     setUser(result);
@@ -122,7 +123,7 @@ const UserManagement = () => {
 
     useEffect(() => {
         if (doChangeVisible.doChange) {
-            fetch("http://localhost:8080/game/visibility/" + doChangeVisible.gameId)
+            fetch(host_back + "/game/visibility/" + doChangeVisible.gameId)
                 .then(res => res.json())
                 .then(() => {
                     notify_success_visible();
@@ -273,7 +274,7 @@ const UserManagement = () => {
                                             {gameList.map((game) => (
                                                 <TableRow>
                                                     <TableCell><a className="gamelink"
-                                                                  href={"http://localhost:3000/gamepanel?id=" + game.id + "&session=" + session}
+                                                                  href={host_front + "/gamepanel?id=" + game.id + "&session=" + session}
                                                                   target="_blank" rel="noopener noreferrer">
                                                         {game.name}
                                                     </a></TableCell>
@@ -324,7 +325,7 @@ const UserManagement = () => {
                                         {scores.map((score) => (
                                             <TableRow>
                                                 <TableCell><a className="gamelink"
-                                                              href={"http://localhost:3000/gamepanel?id=" + score.id + "&session=" + session}
+                                                              href={host_front + "/gamepanel?id=" + score.id + "&session=" + session}
                                                               target="_blank" rel="noopener noreferrer">
                                                     {score.title}
                                                 </a></TableCell>

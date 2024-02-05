@@ -13,6 +13,7 @@ import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 import Rating from "@mui/material/Rating";
 import {toast} from "react-toastify";
+import {host_back} from "../../Constants/global";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -51,7 +52,7 @@ export default function AlertDialogSlide({count, gameId, session}: { count: numb
 
     useEffect(() => {
         if(rateSubmit) {
-            fetch("http://localhost:8080/game/" + gameId + "/ratings/" + session + "/rate/" + value)
+            fetch(host_back + "/game/" + gameId + "/ratings/" + session + "/rate/" + value)
                 .then(res => res.text())
                 .then(() => {
                     notify_success_rate()

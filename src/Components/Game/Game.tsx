@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import background from "../Assets/game_page.jpg";
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
 import {animate, motion, stagger, useAnimate} from 'framer-motion';
+import {host_back} from "../../Constants/global";
 
 
 const Game = () => {
@@ -73,7 +74,7 @@ const Game = () => {
     )
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/active/get/" + gameId)
+        fetch(host_back + "/game/active/get/" + gameId)
             .then(res => res.json())
             .then(result => {
                 setActiveGame(result);
@@ -83,7 +84,7 @@ const Game = () => {
 
     useEffect(() => {
         if (sendRequest) {
-            fetch("http://localhost:8080/game/" + gameId + "/guess/" + currentGuess)
+            fetch(host_back + "/game/" + gameId + "/guess/" + currentGuess)
                 .then(res => res.json())
                 .then(result => {
                     const newList = guessResults.concat(result)
@@ -107,7 +108,7 @@ const Game = () => {
         }
 
         if (guessResult.game_won[0]==='true') {
-            fetch("http://localhost:8080/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
+            fetch(host_back + "/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
             gameWin();
         }
 

@@ -10,6 +10,7 @@ import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
 import background from "../Assets/login_page.jpg"
 import { motion } from 'framer-motion';
 import Home from "../Home/Home";
+import {host_back} from "../../Constants/global";
 
 const LoginSignup = () => {
 
@@ -31,7 +32,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doLogin) {
-            fetch("http://localhost:8080/user/login", {
+            fetch(host_back + "/user/login", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {
@@ -47,7 +48,7 @@ const LoginSignup = () => {
 
     useEffect(() => {
         if (doRegister) {
-            fetch("http://localhost:8080/register", {
+            fetch(host_back + "/register", {
                 method: 'POST',
                 body: JSON.stringify({login, password}),
                 headers: {

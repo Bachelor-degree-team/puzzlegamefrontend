@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import {createTheme, ThemeProvider} from "@mui/material";
 import { motion } from "framer-motion"
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
+import {host_back} from "../../Constants/global";
 
 const theme = createTheme({
     palette: {
@@ -71,7 +72,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/get/example")
+        fetch(host_back + "/game/get/example")
             .then(res => res.text())
             .then(result => {
                 setExampleGameId(result);
@@ -79,7 +80,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/get/random")
+        fetch(host_back + "/game/get/random")
             .then(res => res.text())
             .then(result => {
                 setRandomGameId(result);
