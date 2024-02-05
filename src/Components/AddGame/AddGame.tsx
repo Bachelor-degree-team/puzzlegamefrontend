@@ -10,6 +10,7 @@ import password_icon from "../Assets/password.png";
 import password_bad_icon from "../Assets/password-bad.png";
 import Typography from "@mui/material/Typography";
 import {toast} from "react-toastify";
+import {host_back} from "../../Constants/global";
 
 const AddGame = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -41,7 +42,7 @@ const AddGame = () => {
     const notify_success_added = () => toast.success("Successfully added a game!");
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/logged/" + session)
+        fetch(host_back + "/user/logged/" + session)
             .then(res => res.json())
             .then(result => {
                 setUser(result);
@@ -53,7 +54,7 @@ const AddGame = () => {
             const formData = new FormData();
             formData.append('csv', selectedFile);
             formData.append('separator', isRak ? ';' : ',');
-            fetch("http://localhost:8080/file/check", {
+            fetch(host_back + "/file/check", {
                 method: 'POST',
                 body: formData
             })
@@ -121,7 +122,7 @@ const AddGame = () => {
             formData.append('title', title);
             formData.append('desc', description);
             formData.append('session', session || '');
-            fetch("http://localhost:8080/game/create", {
+            fetch(host_back + "/game/create", {
                 method: 'POST',
                 body: formData
             })

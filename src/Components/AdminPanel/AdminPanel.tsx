@@ -6,6 +6,7 @@ import {motion} from "framer-motion";
 import Rating from "@mui/material/Rating";
 import {Navigate} from "react-router-dom";
 import {toast} from "react-toastify";
+import {host_back, host_front} from "../../Constants/global";
 
 const AdminPanel = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -61,7 +62,7 @@ const AdminPanel = () => {
     });
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/admin/getAll")
+        fetch(host_back + "/game/admin/getAll")
             .then(res => res.json())
             .then(result => {
                 setGames(result);
@@ -69,7 +70,7 @@ const AdminPanel = () => {
     }, [])
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/getAll")
+        fetch(host_back + "/user/getAll")
             .then(res => res.json())
             .then(result => {
                 setUsers(result);
@@ -78,7 +79,7 @@ const AdminPanel = () => {
 
     useEffect(() => {
         if (doBlockUser.doBlock) {
-            fetch("http://localhost:8080/user/" + doBlockUser.userId + "/block/true")
+            fetch(host_back + "/user/" + doBlockUser.userId + "/block/true")
                 .then(res => res.text())
                 .then(result => {
                     setDoBlockUser({doBlock: false, userId: ''})
@@ -89,7 +90,7 @@ const AdminPanel = () => {
 
     useEffect(() => {
         if (doUnblockUser.doUnblock) {
-            fetch("http://localhost:8080/user/" + doUnblockUser.userId + "/block/false")
+            fetch(host_back + "/user/" + doUnblockUser.userId + "/block/false")
                 .then(res => res.text())
                 .then(() => {
                     setDoUnblockUser({doUnblock: false, userId: ''})
@@ -161,7 +162,7 @@ const AdminPanel = () => {
                                 <Rating name="read-only" defaultValue={item.rating} precision={0.5} readOnly/>
                             </td>
                             <td>
-                                <a className="gamelink" href={"http://localhost:3000/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
+                                <a className="gamelink" href={host_front + "/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
                                     {item.title}
                                 </a>
                             </td>

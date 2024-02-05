@@ -7,6 +7,7 @@ import "./RemoveGame.css"
 import {Navigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import {toast} from "react-toastify";
+import {host_back} from "../../Constants/global";
 
 const RemoveGame = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -27,7 +28,7 @@ const RemoveGame = () => {
     const notify_success_removed = () => toast.success("Removed successfully");
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/get/" + gameId)
+        fetch(host_back + "/game/get/" + gameId)
             .then(res => res.json())
             .then((res) => {
                 setGame(res);
@@ -36,7 +37,7 @@ const RemoveGame = () => {
 
     useEffect(() => {
         if (doRemove) {
-            fetch("http://localhost:8080/game/remove/" + gameId)
+            fetch(host_back + "/game/remove/" + gameId)
                 .then(res => res.json())
                 .then(() => {
                     notify_success_removed();

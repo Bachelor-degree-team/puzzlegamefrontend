@@ -4,9 +4,44 @@
     margin-top: 50px;
 }
 
-.table-columns {
+.table-columns-3 {
+    border-collapse: collapse;
+    width: 26%;
+    margin: 0;
+    table-layout: fixed;
+}
+
+.table-columns-4 {
+    border-collapse: collapse;
+    width: 35%;
+    margin: 0;
+    table-layout: fixed;
+}
+
+.table-columns-5 {
     border-collapse: collapse;
     width: 43%;
+    margin: 0;
+    table-layout: fixed;
+}
+
+.table-columns-6 {
+    border-collapse: collapse;
+    width: 52%;
+    margin: 0;
+    table-layout: fixed;
+}
+
+.table-columns-7 {
+    border-collapse: collapse;
+    width: 61%;
+    margin: 0;
+    table-layout: fixed;
+}
+
+.table-columns-8 {
+    border-collapse: collapse;
+    width: 69%;
     margin: 0;
     table-layout: fixed;
 }

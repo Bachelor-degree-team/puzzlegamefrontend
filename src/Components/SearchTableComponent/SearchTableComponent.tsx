@@ -6,6 +6,7 @@ import Rating from '@mui/material/Rating';
 import background from "../Assets/search_page.jpg";
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
 import { motion } from 'framer-motion';
+import {host_back, host_front} from "../../Constants/global";
 
 const SearchTableComponent = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -15,7 +16,7 @@ const SearchTableComponent = () => {
     const [games, setGames] = useState<any[]>([])
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/public/getAll")
+        fetch(host_back + "/game/public/getAll")
             .then(res => res.json())
             .then(result => {
                 setGames(result);
@@ -66,7 +67,7 @@ const SearchTableComponent = () => {
                                 <Rating name="read-only" defaultValue={item.rating} precision={0.5} readOnly/>
                             </td>
                             <td>
-                                <a className="gamelink" href={"http://localhost:3000/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
+                                <a className="gamelink" href={host_front + "/gamepanel?id=" + item.id + "&session=" + session} target="_blank" rel="noopener noreferrer">
                                     {item.title}
                                 </a>
                             </td>

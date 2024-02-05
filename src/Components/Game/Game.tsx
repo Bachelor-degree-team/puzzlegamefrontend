@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import background from "../Assets/game_page.jpg";
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
 import {animate, motion, stagger, useAnimate} from 'framer-motion';
+import {host_back} from "../../Constants/global";
 
 
 const Game = () => {
@@ -50,6 +51,9 @@ const Game = () => {
         [activeGame.columns[2]]: [''],
         [activeGame.columns[3]]: [''],
         [activeGame.columns[4]]: [''],
+        [activeGame.columns[5]]: [''],
+        [activeGame.columns[6]]: [''],
+        [activeGame.columns[7]]: [''],
         game_won: ['']
     })
 
@@ -61,13 +65,16 @@ const Game = () => {
                 [activeGame.columns[2]]: [''],
                 [activeGame.columns[3]]: [''],
                 [activeGame.columns[4]]: [''],
+                [activeGame.columns[5]]: [''],
+                [activeGame.columns[6]]: [''],
+                [activeGame.columns[7]]: [''],
                 game_won: ['']
             }
         ]
     )
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/active/get/" + gameId)
+        fetch(host_back + "/game/active/get/" + gameId)
             .then(res => res.json())
             .then(result => {
                 setActiveGame(result);
@@ -77,7 +84,7 @@ const Game = () => {
 
     useEffect(() => {
         if (sendRequest) {
-            fetch("http://localhost:8080/game/" + gameId + "/guess/" + currentGuess)
+            fetch(host_back + "/game/" + gameId + "/guess/" + currentGuess)
                 .then(res => res.json())
                 .then(result => {
                     const newList = guessResults.concat(result)
@@ -101,7 +108,7 @@ const Game = () => {
         }
 
         if (guessResult.game_won[0]==='true') {
-            fetch("http://localhost:8080/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
+            fetch(host_back + "/user/" + session + "/scores/" + databaseGameId + "/add/" + counter)
             gameWin();
         }
 
@@ -135,8 +142,11 @@ const Game = () => {
                     <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[0]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[0]] || [''] )[0] || ''}</div>
                     <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[1]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[1]] || [''] )[0] || ''}</div>
                     <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[2]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[2]] || [''] )[0] || ''}</div>
-                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[3]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[3]] || [''] )[0] || ''}</div>
-                    <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[4]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[4]] || [''] )[0] || ''}</div>
+                    {guessResults[i][activeGame.columns[3]] !== undefined ? <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[3]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[3]] || [''] )[0] || ''}</div> : <div></div>}
+                    {guessResults[i][activeGame.columns[4]] !== undefined ? <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[4]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[4]] || [''] )[0] || ''}</div> : <div></div>}
+                    {guessResults[i][activeGame.columns[5]] !== undefined ? <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[5]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[5]] || [''] )[0] || ''}</div> : <div></div>}
+                    {guessResults[i][activeGame.columns[6]] !== undefined ? <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[6]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[6]] || [''] )[0] || ''}</div> : <div></div>}
+                    {guessResults[i][activeGame.columns[7]] !== undefined ? <div className={"square " + (i===len ? "anim " : "") + (i===0 ? "hidden " : "") + (guessResults[i][activeGame.columns[7]] || [''] )[1] || ''}>{(guessResults[i][activeGame.columns[7]] || [''] )[0] || ''}</div> : <div></div>}
                 </div>
             );
         }
@@ -167,7 +177,7 @@ const Game = () => {
                     }}>Guess!</Button>
                 </div>
                 {gameWonAfterDelay? <AlertDialogSlide count={counter} session={session || ''} gameId={databaseGameId || ''}/> : <div/>}
-                <table className="table-columns">
+                <table className={"table-columns-" + activeGame.columns.length}>
                     <thead>
                     <tr>
                         {activeGame.columns.map((item) => (

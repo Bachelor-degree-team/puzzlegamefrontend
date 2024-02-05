@@ -7,6 +7,7 @@ import "./RemoveUser.css"
 import {Navigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import {toast} from "react-toastify";
+import {host_back} from "../../Constants/global";
 
 const RemoveUser = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -29,7 +30,7 @@ const RemoveUser = () => {
     const notify_success_removed = () => toast.success("Removed successfully");
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/get/" + userId)
+        fetch(host_back + "/user/get/" + userId)
             .then(res => res.json())
             .then((res) => {
                 setUser(res);
@@ -37,7 +38,7 @@ const RemoveUser = () => {
     }, [userId])
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/isAdmin/" + session)
+        fetch(host_back + "/user/isAdmin/" + session)
             .then(res => res.json())
             .then(result => {
                 setIsAdmin(result);
@@ -46,7 +47,7 @@ const RemoveUser = () => {
 
     useEffect(() => {
         if (doRemove) {
-            fetch("http://localhost:8080/user/remove/" + userId)
+            fetch(host_back + "/user/remove/" + userId)
                 .then(res => res.json())
                 .then(() => {
                     notify_success_removed();

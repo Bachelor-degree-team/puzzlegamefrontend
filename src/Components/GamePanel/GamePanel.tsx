@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar";
 import background from "../Assets/game_page.jpg";
 import {motion} from 'framer-motion';
+import { host_back, host_front } from '../../Constants/global';
 
 const GamePanel = () => {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -16,7 +17,7 @@ const GamePanel = () => {
     const [activeGameReady, setActiveGameReady] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:8080/game/get/" + gameId)
+        fetch(host_back + "/game/get/" + gameId)
             .then(res => res.json())
             .then(result => {
                 setGame(result);
@@ -25,7 +26,7 @@ const GamePanel = () => {
 
     useEffect(() => {
         if (sendRequest) {
-            fetch("http://localhost:8080/game/" + gameId + "/play")
+            fetch(host_back + "/game/" + gameId + "/play")
                 .then(res => res.text())
                 .then(result => {
                     setActiveGameId(result);
