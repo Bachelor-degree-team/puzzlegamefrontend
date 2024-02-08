@@ -24,11 +24,6 @@ const LoginSignup = () => {
     const[loginResult, setLoginResult] = useState([''])
     const[registerResult, setRegisterResult] = useState(false)
 
-    const notify_error_login = () => toast.error("Could not log in - check credentials");
-    const notify_success_login = () => toast.success("Successfully logged in!");
-    const notify_error_register = () => toast.error("Could not register - username taken");
-    const notify_success_register = () => toast.success("Account registered successfully!");
-
 
     useEffect(() => {
         if (doLogin) {
@@ -42,6 +37,11 @@ const LoginSignup = () => {
                 .then(res => res.json())
                 .then(result => {
                     setLoginResult(result);
+                    if (result[0]=='true') {
+                        toast.success("Successfully logged in!");
+                    } else {
+                        toast.error("Could not log in - check credentials");
+                    }
                 })
         }
     }, [doLogin])
@@ -58,27 +58,29 @@ const LoginSignup = () => {
                 .then(res => res.json())
                 .then(result => {
                     setRegisterResult(result);
+                    if (result) {
+                        toast.success("Account registered successfully!");
+                    } else {
+                        toast.error("Could not register - username taken");
+                    }
+
                 })
         }
     }, [doRegister])
 
     useEffect(() => {
         if (registerResult) {
-            notify_success_register()
             setDoRegister(false)
             setAction("Login");
         } else if (doRegister){
-            notify_error_register()
             setDoRegister(false)
         }
     }, [registerResult, doRegister])
 
     useEffect(() => {
         if (loginResult[0]=='true') {
-            notify_success_login()
             setDoLogin(false)
         } else if (doLogin) {
-            notify_error_login()
             setDoLogin(false)
         }
     }, [loginResult, doLogin])
