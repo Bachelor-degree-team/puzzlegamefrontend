@@ -6,3 +6,8 @@ services:
     container_name: react-app
     ports:
       - "3000:3000"
+  nginx-server:
+    image: nginx-server
+    container_name: nginx-server
+    ports:
+      - "80:80"
